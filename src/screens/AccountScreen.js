@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,15 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SHADOWS } from '../styles/colors';
+import { AuthContext } from '../../App';
 
 const AccountScreen = () => {
+  const { logout, userData } = useContext(AuthContext);
+  
   const handleCallAgent = () => {
     console.log('Calling agent...');
   };
@@ -29,6 +33,27 @@ const AccountScreen = () => {
 
   const handleFollowInstagram = () => {
     console.log('Follow Instagram pressed...');
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: () => {
+            console.log('Logout button pressed, calling logout function');
+            logout();
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -52,10 +77,18 @@ const AccountScreen = () => {
               <Ionicons name="person" size={32} color={COLORS.blue} />
             </View>
             <View style={styles.profileDetails}>
-              <Text style={styles.profileName}>Khodiyar car care and</Text>
-              <Text style={styles.profileName}>J d group</Text>
-              <Text style={styles.profilePhone}>6354691866</Text>
-              <Text style={styles.profileId}>ID: 124228</Text>
+              <Text style={styles.profileName}>
+                {userData?.fullName || 'User Name'}
+              </Text>
+              {userData?.companyName && (
+                <Text style={styles.profileName}>{userData.companyName}</Text>
+              )}
+              <Text style={styles.profilePhone}>
+                {userData?.phoneNumber || 'Phone Number'}
+              </Text>
+              <Text style={styles.profileId}>
+                ID: {userData?.id || 'N/A'}
+              </Text>
             </View>
             <TouchableOpacity style={styles.profileArrow}>
               <Ionicons name="chevron-forward" size={20} color={COLORS.gray} />
@@ -140,6 +173,18 @@ const AccountScreen = () => {
               <Text style={styles.menuSubtitle}>View updates</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color={COLORS.gray} />
+          </TouchableOpacity>
+
+          {/* Logout */}
+          <TouchableOpacity style={[styles.menuItem, styles.logoutMenuItem]} onPress={handleLogout}>
+            <View style={styles.menuIcon}>
+              <Ionicons name="log-out-outline" size={24} color={COLORS.error} />
+            </View>
+            <View style={styles.menuContent}>
+              <Text style={[styles.menuTitle, styles.logoutText]}>Logout</Text>
+              <Text style={styles.menuSubtitle}>Sign out of your account</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={COLORS.error} />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -385,6 +430,12 @@ const styles = StyleSheet.create({
   menuSubtitle: {
     fontSize: 14,
     color: COLORS.gray,
+  },
+  logoutMenuItem: {
+    borderBottomWidth: 0,
+  },
+  logoutText: {
+    color: COLORS.error,
   },
 });
 
