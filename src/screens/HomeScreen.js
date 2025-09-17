@@ -83,8 +83,6 @@ const HomeScreen = () => {
     <SafeAreaView style={styles.container}>
       <SearchBar
         onSearch={handleSearch}
-        onFilterPress={() => console.log('Filter pressed')}
-        onSortPress={() => console.log('Sort pressed')}
       />
       
       <ScrollView 

@@ -3,9 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from '../screens/HomeScreen';
-import MyCarsScreen from '../screens/MyCarsScreen';
 import OrdersScreen from '../screens/OrdersScreen';
-import AddOnsScreen from '../screens/AddOnsScreen';
 import AccountScreen from '../screens/AccountScreen';
 
 const Tab = createBottomTabNavigator();
@@ -19,12 +17,8 @@ const MainAppNavigator = () => {
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'My cars') {
-            iconName = focused ? 'car-sport' : 'car-sport-outline';
           } else if (route.name === 'Orders') {
             iconName = focused ? 'list' : 'list-outline';
-          } else if (route.name === 'Add Ons') {
-            iconName = focused ? 'add' : 'add-outline';
           } else if (route.name === 'Account') {
             iconName = focused ? 'person' : 'person-outline';
           }
@@ -53,9 +47,7 @@ const MainAppNavigator = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="My cars" component={MyCarsScreen} />
       <Tab.Screen name="Orders" component={OrdersScreen} />
-      <Tab.Screen name="Add Ons" component={AddOnsScreen} />
       <Tab.Screen name="Account" component={AccountScreen} />
     </Tab.Navigator>
   );
