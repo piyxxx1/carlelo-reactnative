@@ -142,8 +142,12 @@ const PersonalDetailsScreen = ({ route, navigation }) => {
           {/* Terms */}
           <Text style={styles.termsText}>
             By continuing, you agree to our{' '}
-            <Text style={styles.linkText}>Terms of Service</Text> and{' '}
-            <Text style={styles.linkText}>Privacy Policy</Text>
+            <Text style={styles.linkText} onPress={() => navigation.navigate('TermsOfService')}>
+              Terms of Service
+            </Text> and{' '}
+            <Text style={styles.linkText} onPress={() => navigation.navigate('PrivacyPolicy')}>
+              Privacy Policy
+            </Text>
           </Text>
         </View>
       </ScrollView>

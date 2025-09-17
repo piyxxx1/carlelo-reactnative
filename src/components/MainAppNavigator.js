@@ -14,17 +14,17 @@ const MainAppNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, color, size = 24 }) => {
           let iconName;
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'My cars') {
-            iconName = focused ? 'car' : 'car-outline';
+            iconName = focused ? 'car-sport' : 'car-sport-outline';
           } else if (route.name === 'Orders') {
-            iconName = focused ? 'document-text' : 'document-text-outline';
+            iconName = focused ? 'list' : 'list-outline';
           } else if (route.name === 'Add Ons') {
-            iconName = focused ? 'add-circle' : 'add-circle-outline';
+            iconName = focused ? 'add' : 'add-outline';
           } else if (route.name === 'Account') {
             iconName = focused ? 'person' : 'person-outline';
           }
@@ -37,13 +37,17 @@ const MainAppNavigator = () => {
           backgroundColor: '#ffffff',
           borderTopWidth: 1,
           borderTopColor: '#e1e1e6',
-          paddingBottom: 5,
-          paddingTop: 5,
-          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+          height: 65,
         },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '500',
+          marginTop: 2,
+        },
+        tabBarIconStyle: {
+          marginTop: 2,
         },
         headerShown: false,
       })}

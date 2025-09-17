@@ -6,6 +6,9 @@ import { StatusBar } from 'expo-status-bar';
 import PhoneLoginScreen from './src/screens/PhoneLoginScreen';
 import OTPVerificationScreen from './src/screens/OTPVerificationScreen';
 import PersonalDetailsScreen from './src/screens/PersonalDetailsScreen';
+import InspectionLoginScreen from './src/screens/InspectionLoginScreen';
+import TermsOfServiceScreen from './src/screens/TermsOfServiceScreen';
+import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
 import MainAppNavigator from './src/components/MainAppNavigator';
 
 const Stack = createStackNavigator();
@@ -55,6 +58,9 @@ export default function App() {
               <Stack.Screen name="PhoneLogin" component={PhoneLoginScreen} />
               <Stack.Screen name="OTPVerification" component={OTPVerificationScreen} />
               <Stack.Screen name="PersonalDetails" component={PersonalDetailsScreen} />
+              <Stack.Screen name="InspectionLogin" component={InspectionLoginScreen} />
+              <Stack.Screen name="TermsOfService" component={TermsOfServiceScreen} />
+              <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
             </>
           ) : (
             // Authenticated user sees main app
