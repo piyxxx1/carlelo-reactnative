@@ -46,11 +46,11 @@ const PhoneLoginScreen = ({ navigation }) => {
           {/* Header with Logo */}
           <View style={styles.header}>
             <Image 
-              source={require('../assest/carlelologo.png')} 
+              source={require('../assest/CarsBazarlogo.png')} 
               style={styles.logo}
               resizeMode="contain"
             />
-            <Text style={styles.title}>Welcome to Carlelo</Text>
+            <Text style={styles.title}>Welcome to Carsbazar</Text>
             <Text style={styles.subtitle}>Enter your phone number to continue</Text>
           </View>
 

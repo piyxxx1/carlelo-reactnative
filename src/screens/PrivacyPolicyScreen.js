@@ -31,7 +31,7 @@ const PrivacyPolicyScreen = ({ navigation }) => {
           {/* Logo */}
           <View style={styles.logoContainer}>
             <Image 
-              source={require('../assest/carlelologo.png')} 
+              source={require('../assest/CarsBazarlogo.png')} 
               style={styles.logo}
               resizeMode="contain"
             />
@@ -114,7 +114,7 @@ const PrivacyPolicyScreen = ({ navigation }) => {
             <Text style={styles.paragraph}>
               If you have any questions about this Privacy Policy, please contact us:
             </Text>
-            <Text style={styles.contactInfo}>Email: privacy@carlelo.com</Text>
+            <Text style={styles.contactInfo}>Email: privacy@carsbazar.com</Text>
             <Text style={styles.contactInfo}>Phone: +91-XXXX-XXXX-XX</Text>
             <Text style={styles.contactInfo}>Address: CarsLelo Technologies, India</Text>
 

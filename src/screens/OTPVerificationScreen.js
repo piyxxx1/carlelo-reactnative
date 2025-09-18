@@ -117,7 +117,7 @@ const OTPVerificationScreen = ({ route, navigation }) => {
         {/* Header with Logo */}
         <View style={styles.header}>
           <Image 
-            source={require('../assest/carlelologo.png')} 
+            source={require('../assest/CarsBazarlogo.png')} 
             style={styles.logo}
             resizeMode="contain"
           />

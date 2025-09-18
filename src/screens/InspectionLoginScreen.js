@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -12,12 +12,14 @@ import {
   Image,
 } from 'react-native';
 import { COLORS, SHADOWS } from '../styles/colors';
+import { AuthContext } from '../../App';
 
 const InspectionLoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { login } = useContext(AuthContext);
 
   const handleInspectionLogin = () => {
     if (!email || !password) {
@@ -43,19 +45,13 @@ const InspectionLoginScreen = ({ navigation }) => {
     setTimeout(() => {
       setIsLoading(false);
       // For demo purposes, accept any valid email and password
-      Alert.alert(
-        'Login Successful', 
-        'Welcome to Inspection Manager Portal!',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              // Here you can navigate to inspection dashboard or show inspection features
-              console.log('Inspection login successful for:', email);
-            }
-          }
-        ]
-      );
+      // Call the login function to authenticate the user and redirect to home screen
+      login({ 
+        email: email, 
+        userType: 'inspection',
+        loginMethod: 'inspection'
+      });
+      console.log('Inspection login successful for:', email);
     }, 2000);
   };
 
@@ -73,7 +69,7 @@ const InspectionLoginScreen = ({ navigation }) => {
           {/* Header with Logo */}
           <View style={styles.header}>
             <Image 
-              source={require('../assest/carlelologo.png')} 
+              source={require('../assest/CarsBazarlogo.png')} 
               style={styles.logo}
               resizeMode="contain"
             />

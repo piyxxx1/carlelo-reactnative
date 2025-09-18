@@ -11,9 +11,8 @@ import SearchBar from '../components/SearchBar';
 import CarCard from '../components/CarCard';
 import { COLORS } from '../styles/colors';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [likedCars, setLikedCars] = useState(new Set());
 
   // Sample car data based on the screenshots
   const [cars] = useState([
@@ -56,22 +55,19 @@ const HomeScreen = () => {
   };
 
   const handleCarPress = (car) => {
-    console.log('Car pressed:', car.name);
+    console.log('HomeScreen - handleCarPress called with car:', car);
+    console.log('HomeScreen - navigation object:', navigation);
+    if (navigation) {
+      navigation.navigate('CarDetails', { car });
+    } else {
+      console.error('Navigation object is not available');
+    }
   };
 
   const handleBidPress = (car) => {
     console.log('Bid pressed for:', car.name);
   };
 
-  const handleHeartPress = (carId) => {
-    const newLikedCars = new Set(likedCars);
-    if (newLikedCars.has(carId)) {
-      newLikedCars.delete(carId);
-    } else {
-      newLikedCars.add(carId);
-    }
-    setLikedCars(newLikedCars);
-  };
 
   const filteredCars = cars.filter(car =>
     car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -95,13 +91,9 @@ const HomeScreen = () => {
           {filteredCars.map((car, index) => (
             <CarCard
               key={`${car.id}-${index}`}
-              car={{
-                ...car,
-                isLiked: likedCars.has(car.id),
-              }}
+              car={car}
               onPress={() => handleCarPress(car)}
               onBidPress={() => handleBidPress(car)}
-              onHeartPress={() => handleHeartPress(car.id)}
             />
           ))}
           

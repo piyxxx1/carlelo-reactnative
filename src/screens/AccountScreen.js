@@ -65,7 +65,6 @@ const AccountScreen = () => {
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile</Text>
         <View style={styles.headerRight}>
-          <Text style={styles.daysText}>6 days</Text>
         </View>
       </View>
 
@@ -135,7 +134,7 @@ const AccountScreen = () => {
         <View style={styles.instagramBanner}>
           <View style={styles.instagramContent}>
             <Text style={styles.instagramTitle}>Your stores now have a new destination</Text>
-            <Text style={styles.instagramSubtitle}>Follow CARS24 Partners</Text>
+            <Text style={styles.instagramSubtitle}>Follow Carsbazar Partners</Text>
             <TouchableOpacity style={styles.followButton} onPress={handleFollowInstagram}>
               <Text style={styles.followButtonText}>Follow</Text>
             </TouchableOpacity>
@@ -163,13 +162,13 @@ const AccountScreen = () => {
             <Ionicons name="chevron-forward" size={20} color={COLORS.gray} />
           </TouchableOpacity>
 
-          {/* CARS24 Updates */}
+          {/* Carsbazar Updates */}
           <TouchableOpacity style={styles.menuItem} onPress={handleUpdates}>
             <View style={styles.menuIcon}>
               <Ionicons name="notifications-outline" size={24} color={COLORS.gray} />
             </View>
             <View style={styles.menuContent}>
-              <Text style={styles.menuTitle}>CARS24 updates</Text>
+              <Text style={styles.menuTitle}>Carsbazar updates</Text>
               <Text style={styles.menuSubtitle}>View updates</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color={COLORS.gray} />

@@ -12,7 +12,7 @@ import { COLORS, SHADOWS } from '../styles/colors';
 
 const { width } = Dimensions.get('window');
 
-const CarCard = ({ car, onPress, onBidPress, onHeartPress }) => {
+const CarCard = ({ car, onPress, onBidPress }) => {
   const {
     id,
     name,
@@ -28,7 +28,6 @@ const CarCard = ({ car, onPress, onBidPress, onHeartPress }) => {
     fairMarketValue,
     timeRemaining,
     status,
-    isLiked = false,
   } = car;
 
   const formatCurrency = (amount) => {
@@ -56,14 +55,6 @@ const CarCard = ({ car, onPress, onBidPress, onHeartPress }) => {
           resizeMode="cover"
         />
         
-        {/* Heart Icon */}
-        <TouchableOpacity style={styles.heartButton} onPress={onHeartPress}>
-          <Ionicons
-            name={isLiked ? 'heart' : 'heart-outline'}
-            size={24}
-            color={isLiked ? COLORS.primary : COLORS.white}
-          />
-        </TouchableOpacity>
 
         {/* Cars24 Badge */}
         <View style={styles.cars24Badge}>
@@ -170,17 +161,6 @@ const styles = StyleSheet.create({
   carImage: {
     width: '100%',
     height: '100%',
-  },
-  heartButton: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   cars24Badge: {
     position: 'absolute',

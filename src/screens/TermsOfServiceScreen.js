@@ -31,7 +31,7 @@ const TermsOfServiceScreen = ({ navigation }) => {
           {/* Logo */}
           <View style={styles.logoContainer}>
             <Image 
-              source={require('../assest/carlelologo.png')} 
+              source={require('../assest/CarsBazarlogo.png')} 
               style={styles.logo}
               resizeMode="contain"
             />
@@ -43,12 +43,12 @@ const TermsOfServiceScreen = ({ navigation }) => {
 
             <Text style={styles.sectionTitle}>1. Acceptance of Terms</Text>
             <Text style={styles.paragraph}>
-              By accessing and using the Carlelo mobile application ("App"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+              By accessing and using the Carsbazar mobile application ("App"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
             </Text>
 
             <Text style={styles.sectionTitle}>2. Use License</Text>
             <Text style={styles.paragraph}>
-              Permission is granted to temporarily download one copy of the Carlelo app for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+              Permission is granted to temporarily download one copy of the Carsbazar app for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
             </Text>
             <Text style={styles.bulletPoint}>• Modify or copy the materials</Text>
             <Text style={styles.bulletPoint}>• Use the materials for any commercial purpose or for any public display</Text>
@@ -103,7 +103,7 @@ const TermsOfServiceScreen = ({ navigation }) => {
             <Text style={styles.paragraph}>
               If you have any questions about these Terms of Service, please contact us at:
             </Text>
-            <Text style={styles.contactInfo}>Email: support@carlelo.com</Text>
+            <Text style={styles.contactInfo}>Email: support@carsbazar.com</Text>
             <Text style={styles.contactInfo}>Phone: +91-XXXX-XXXX-XX</Text>
             <Text style={styles.contactInfo}>Address: CarsLelo Technologies, India</Text>
           </View>
