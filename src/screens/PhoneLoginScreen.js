@@ -12,24 +12,29 @@ import {
   Image,
 } from 'react-native';
 import { COLORS, SHADOWS } from '../styles/colors';
+import auth from "@react-native-firebase/auth";
 
 const PhoneLoginScreen = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendOTP = () => {
-    if (!phoneNumber || phoneNumber.length < 10) {
-      Alert.alert('Invalid Phone Number', 'Please enter a valid 10-digit phone number');
-      return;
-    }
-
-    setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
+  const handleSendOtp = async () => {
+    if (!phoneNumber) return;
+    const cphoneNumber = `+91${phoneNumber}`;
+    try {
+      setIsLoading(true);
+      const confirmation = await auth().signInWithPhoneNumber(cphoneNumber);
       setIsLoading(false);
-      navigation.navigate('OTPVerification', { phoneNumber });
-    }, 2000);
+      navigation.navigate("OTPVerification", {
+        cphoneNumber,
+        confirmation,
+      });
+    } catch (err) {
+      setIsLoading(false);
+      console.error("Error sending OTP:", err);
+    }
   };
+
 
   const handleInspectionLogin = () => {
     navigation.navigate('InspectionLogin');
@@ -76,7 +81,7 @@ const PhoneLoginScreen = ({ navigation }) => {
           {/* Send OTP Button */}
           <TouchableOpacity
             style={[styles.otpButton, isLoading && styles.otpButtonDisabled]}
-            onPress={handleSendOTP}
+            onPress={handleSendOtp}
             disabled={isLoading}
           >
             <Text style={styles.otpButtonText}>

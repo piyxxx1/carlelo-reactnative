@@ -10,6 +10,13 @@ import InspectionLoginScreen from './src/screens/InspectionLoginScreen';
 import TermsOfServiceScreen from './src/screens/TermsOfServiceScreen';
 import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
 import MainAppNavigator from './src/components/MainAppNavigator';
+import { InspectionScreen, CarDetailsInspection } from './src/screens/inspection';
+import ExteriorTyresInspection from './src/screens/inspection/ExteriorTyresInspection';
+import ElectricalInteriorInspection from './src/screens/inspection/ElectricalInteriorInspection';
+import EngineTransmissionInspection from './src/screens/inspection/EngineTransmissionInspection';
+import SteeringSuspensionBrakesInspection from './src/screens/inspection/SteeringSuspensionBrakesInspection';
+import AirConditioningInspection from './src/screens/inspection/AirConditioningInspection';
+import ComponentIssueScreen from './src/screens/inspection/ComponentIssueScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,11 +26,13 @@ export const AuthContext = createContext();
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [isInspectionMode, setIsInspectionMode] = useState(false);
 
   const logout = () => {
     console.log('Logout called, setting isAuthenticated to false');
     setIsAuthenticated(false);
     setUserData(null); // Clear user data on logout
+    setIsInspectionMode(false); // Reset inspection mode
   };
 
   const login = (userDetails = null) => {
@@ -31,6 +40,10 @@ export default function App() {
     setIsAuthenticated(true);
     if (userDetails) {
       setUserData(userDetails);
+      // Check if user is inspection user
+      if (userDetails.userType === 'inspection') {
+        setIsInspectionMode(true);
+      }
     }
   };
 
@@ -50,7 +63,7 @@ export default function App() {
         <StatusBar style="dark" backgroundColor="#ffffff" />
         <Stack.Navigator 
           screenOptions={{ headerShown: false }}
-          key={isAuthenticated ? 'authenticated' : 'unauthenticated'}
+          key={isAuthenticated ? (isInspectionMode ? 'inspection' : 'main') : 'unauthenticated'}
         >
           {!isAuthenticated ? (
             // Authentication flow
@@ -62,8 +75,20 @@ export default function App() {
               <Stack.Screen name="TermsOfService" component={TermsOfServiceScreen} />
               <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
             </>
+          ) : isInspectionMode ? (
+            // Inspection user sees inspection screens
+            <>
+              <Stack.Screen name="Inspection" component={InspectionScreen} />
+              <Stack.Screen name="CarDetailsInspection" component={CarDetailsInspection} />
+              <Stack.Screen name="ExteriorTyresInspection" component={ExteriorTyresInspection} />
+              <Stack.Screen name="ElectricalInteriorInspection" component={ElectricalInteriorInspection} />
+              <Stack.Screen name="EngineTransmissionInspection" component={EngineTransmissionInspection} />
+              <Stack.Screen name="SteeringSuspensionBrakesInspection" component={SteeringSuspensionBrakesInspection} />
+              <Stack.Screen name="AirConditioningInspection" component={AirConditioningInspection} />
+              <Stack.Screen name="ComponentIssueScreen" component={ComponentIssueScreen} />
+            </>
           ) : (
-            // Authenticated user sees main app
+            // Regular user sees main app
             <Stack.Screen name="MainApp" component={MainAppNavigator} />
           )}
         </Stack.Navigator>

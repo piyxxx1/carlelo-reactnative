@@ -69,6 +69,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
 
+
   const filteredCars = cars.filter(car =>
     car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     car.variant.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -85,6 +86,7 @@ const HomeScreen = ({ navigation }) => {
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
+
         <View style={styles.carsSection}>
           <Text style={styles.sectionTitle}>Live cars</Text>
           

@@ -55,9 +55,6 @@ const InspectionLoginScreen = ({ navigation }) => {
     }, 2000);
   };
 
-  const handleForgotPassword = () => {
-    Alert.alert('Forgot Password', 'Password reset functionality will be implemented here');
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -119,13 +116,6 @@ const InspectionLoginScreen = ({ navigation }) => {
               </View>
             </View>
 
-            {/* Forgot Password */}
-            <TouchableOpacity
-              style={styles.forgotPasswordContainer}
-              onPress={handleForgotPassword}
-            >
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
           </View>
 
           {/* Login Button */}
@@ -231,15 +221,6 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontSize: 14,
     fontWeight: '600',
-  },
-  forgotPasswordContainer: {
-    alignItems: 'flex-end',
-    marginTop: 8,
-  },
-  forgotPasswordText: {
-    color: COLORS.primary,
-    fontSize: 14,
-    fontWeight: '500',
   },
   loginButton: {
     backgroundColor: COLORS.primary,

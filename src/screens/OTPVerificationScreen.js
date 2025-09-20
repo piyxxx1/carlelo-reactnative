@@ -12,17 +12,17 @@ import {
 } from 'react-native';
 import { COLORS, SHADOWS } from '../styles/colors';
 import { AuthContext } from '../../App';
-
+import firestore, { serverTimestamp } from "@react-native-firebase/firestore";
+  
 const OTPVerificationScreen = ({ route, navigation }) => {
-  const { phoneNumber } = route.params;
+  const { cphoneNumber: phoneNumber , confirmation } = route.params;
   const { login } = useContext(AuthContext);
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [isLoading, setIsLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
-  
+   
   const inputRefs = useRef([]);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setResendTimer(prev => {
@@ -33,7 +33,7 @@ const OTPVerificationScreen = ({ route, navigation }) => {
         }
         return prev - 1;
       });
-    }, 1000);
+    }, 1000); 
 
     return () => clearInterval(timer);
   }, []);
@@ -60,7 +60,7 @@ const OTPVerificationScreen = ({ route, navigation }) => {
     }
   };
 
-  const handleVerifyOTP = (otpCode = null) => {
+  const handleVerifyOTP = async(otpCode = null) => {
     const codeToVerify = otpCode || otp.join('');
     
     if (codeToVerify.length !== 6) {
@@ -68,21 +68,37 @@ const OTPVerificationScreen = ({ route, navigation }) => {
       return;
     }
 
-    setIsLoading(true);
+   
+
+    try {
+      setIsLoading(true); 
+
+      const userCredential = await confirmation.confirm(codeToVerify);
+      const { uid, phoneNumber } = userCredential.user;
+
+      const userDoc = await firestore().collection("users").doc(uid).get();
+
+      if (userDoc.exists()) {
+       // navigation.replace("MainApp");
+       Alert.alert(' OTP',);
+
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      // For demo purposes, accept any 6-digit OTP
-      if (codeToVerify.length === 6) {
-        console.log('OTP verified, navigating to personal details');
-        navigation.navigate('PersonalDetails', { phoneNumber });
       } else {
-        Alert.alert('Invalid OTP', 'Please enter the correct OTP');
-        setOtp(['', '', '', '', '', '']);
-        inputRefs.current[0]?.focus();
+        await firestore().collection("users").doc(uid).set({
+          uid,
+          phoneNumber,
+          createdAt: serverTimestamp(),
+        });
+
+        navigation.replace("PersonalDetails");
       }
-    }, 2000);
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      //setErrorMessage("Invalid or expired OTP. Please try again.");
+      console.error("OTP verification error:", err);
+    }
   };
 
   const handleResendOTP = () => {
